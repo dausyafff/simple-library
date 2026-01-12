@@ -1,18 +1,28 @@
 <?php
+require_once __DIR__ . '/app/controllers/BookController.php';
 
-require_once __DIR__ . '/../config/database.php';
+?>
 
-$routes = require __DIR__ . '/../routes/web.php';
+<!DOCTYPE html>
+<html lang="en">
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perpustakaan</title>
+</head>
 
-$action = $routes[$uri] ?? null;
+<body>
+  <h2>Books</h2>
+  <a href="/books/create">Add</a>
 
-if (!$action) {
-  die("404 Not Found");
-}
+  <ul>
+    <?php foreach ($books as $b): ?>
+      <li>
+        <?= $b['title'] ?> - <?= $b['author'] ?> (<?= $b['category'] ?>)
+      </li>
+    <?php endforeach ?>
+  </ul>
+</body>
 
-require_once __DIR__ . '/../app/Controllers/' . $action[0] . '.php';
-
-$controller = new $action[0];
-call_user_func([$controller, $action[1]]);
+</html>

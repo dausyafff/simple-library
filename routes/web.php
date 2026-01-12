@@ -1,10 +1,7 @@
 <?php
 
 return [
-  '/' => ['UserController', 'index'],
-  '/create' => ['UserController', 'create'],
-  '/store' => ['UserController', 'store'],
-  '/edit' => ['UserController', 'edit'],
-  '/update' => ['UserController', 'update'],
-  '/delete' => ['UserController', 'delete'],
+  '/books' => ['BookController', 'index'],
+  '/books/create' => ['BookController', 'create'],
+  '/books/store' => ['BookController', 'store'],
 ];
