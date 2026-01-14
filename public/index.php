@@ -1,28 +1,26 @@
 <?php
-require_once __DIR__ . '/app/controllers/BookController.php';
 
-?>
+// 1. Panggil file konfigurasi database
+require_once __DIR__ . '/../app/config/database.php';
 
-<!DOCTYPE html>
-<html lang="en">
+$route = require_once __DIR__ . '/../routes/web.php';
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan</title>
-</head>
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// hasil "/perpustakaan/public/"
 
-<body>
-  <h2>Books</h2>
-  <a href="/books/create">Add</a>
+$url = rtrim($url, '/') ?: "/";
+// hasil "/perpustakaan/public"
 
-  <ul>
-    <?php foreach ($books as $b): ?>
-      <li>
-        <?= $b['title'] ?> - <?= $b['author'] ?> (<?= $b['category'] ?>)
-      </li>
-    <?php endforeach ?>
-  </ul>
-</body>
+if (!isset($route[$url])) {
+  http_response_code(404);
+  echo "Halaman tidak ditemukan.";
+  exit;
+}
 
-</html>
+$tes = [$controller, $method] = $route[$url];
+
+// load controller
+require_once __DIR__ . '/../app/controllers/' . $controller . '.php';
+
+$controllerInstance = new $controller();
+$controllerInstance->$method();

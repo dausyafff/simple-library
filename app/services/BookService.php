@@ -26,4 +26,8 @@ class BookService
       $data['category_id']
     );
   }
+  public function listHomepageBooks()
+  {
+    return $this->repo->getLatestBooks();
+  }
 }
