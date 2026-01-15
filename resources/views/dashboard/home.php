@@ -8,6 +8,9 @@
 </head>
 
 <body>
+  <p>
+    <a href="/login">Login</a>
+  </p>
   <h1>Books</h1>
   <ul>
     <?php if (empty($books)): ?>

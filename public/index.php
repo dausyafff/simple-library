@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // 1. Panggil file konfigurasi database
 require_once __DIR__ . '/../app/config/database.php';
 
@@ -17,7 +17,7 @@ if (!isset($route[$url])) {
   exit;
 }
 
-$tes = [$controller, $method] = $route[$url];
+[$controller, $method] = $route[$url];
 
 // load controller
 require_once __DIR__ . '/../app/controllers/' . $controller . '.php';

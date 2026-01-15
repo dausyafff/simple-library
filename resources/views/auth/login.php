@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Login</title>
+  <title> <?= $name; ?></title>
 </head>
 
 <body>
@@ -12,6 +12,9 @@
     <input type="password" name="password" placeholder="Password" required>
     <button type="submit">Login</button>
   </form>
+  <p>
+    <a href="/register">Belum Punya Akun?</a>
+  </p>
 </body>
 
 </html>

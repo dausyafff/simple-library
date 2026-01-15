@@ -5,5 +5,6 @@ return [
   '/books/create' => ['BookController', 'create'],
   '/books/store' => ['BookController', 'store'],
   "/" => ['HomeController', 'index'],
-  "/login" => ['AuthController', 'login'],
+  "/login" => ['AuthController', 'index'],
+  "/register" => ['RegisterController', 'index']
 ];

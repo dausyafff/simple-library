@@ -12,7 +12,7 @@ class BookController
   public function index()
   {
     $books = $this->service->listBooks();
-    require __DIR__ . "../index.php";
+    require __DIR__ . '/../../resources/views/dashboard/home.php';
   }
 
   public function create()
