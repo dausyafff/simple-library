@@ -14,8 +14,11 @@
     <br>
     <input type="email" name="email" placeholder="Email" required>
     <br>
+    <input type="password" name="confPass" placeholder="Konfirmasi Password" required>
+    <br>
     <input type="password" name="password" placeholder="Password" required>
     <button type="submit">Register</button>
+  </form>
 </body>
 
 </html>

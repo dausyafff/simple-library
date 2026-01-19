@@ -35,7 +35,6 @@ class AuthService
     if (empty($data['email']) || empty($data['password'])) {
       throw new Exception("Email & password required");
     }
-
     $user = $this->users->findByEmail($data['email']);
 
     if (!$user || !password_verify($data['password'], $user['password'])) {

@@ -1,26 +1,27 @@
 <?php
 session_start();
-// 1. Panggil file konfigurasi database
+
 require_once __DIR__ . '/../app/config/database.php';
 
-$route = require_once __DIR__ . '/../routes/web.php';
+$routes = require __DIR__ . '/../routes/web.php';
 
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-// hasil "/perpustakaan/public/"
+$method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$url = rtrim($url, '/') ?: "/";
-// hasil "/perpustakaan/public"
+// hapus base path
+$basePath = '/perpustakaan/public';
+$uri = str_replace($basePath, '', $uri);
+$uri = rtrim($uri, '/') ?: '/';
 
-if (!isset($route[$url])) {
+if (!isset($routes[$method][$uri])) {
   http_response_code(404);
-  echo "Halaman tidak ditemukan.";
+  echo "Halaman tidak ditemukan";
   exit;
 }
 
-[$controller, $method] = $route[$url];
+[$controller, $action] = $routes[$method][$uri];
 
-// load controller
 require_once __DIR__ . '/../app/controllers/' . $controller . '.php';
 
 $controllerInstance = new $controller();
-$controllerInstance->$method();
+$controllerInstance->$action();

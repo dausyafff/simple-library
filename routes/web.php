@@ -1,10 +1,16 @@
 <?php
-
 return [
-  '/books' => ['BookController', 'index'],
-  '/books/create' => ['BookController', 'create'],
-  '/books/store' => ['BookController', 'store'],
-  "/" => ['HomeController', 'index'],
-  "/login" => ['AuthController', 'index'],
-  "/register" => ['RegisterController', 'index']
+  'GET' => [
+    '/' => ['HomeController', 'index'],
+    '/login' => ['AuthController', 'index'],
+    '/register' => ['RegisterController', 'index'],
+    '/books' => ['BookController', 'index'],
+    '/books/create' => ['BookController', 'create'],
+  ],
+
+  'POST' => [
+    '/books/store' => ['BookController', 'store'],
+    '/register' => ['RegisterController', 'store'],
+    '/login' => ['AuthController', 'login'],
+  ]
 ];

@@ -3,8 +3,8 @@ class AuthController
 {
   public function index()
   {
-    require __DIR__ . '/../../resources/views/auth/login.php';
     $name = "Login Page";
+    require __DIR__ . '/../../resources/views/auth/login.php';
   }
 
   public function login()
