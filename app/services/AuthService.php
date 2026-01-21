@@ -1,55 +1,41 @@
 <?php
 
+require_once __DIR__ . '/../repositories/UserRepository.php';
+
 class AuthService
 {
-  private $users;
+  private $userRepo;
 
   public function __construct()
   {
-    $this->users = new UserRepository();
+    $this->userRepo = new UserRepository();
   }
 
-  // REGISTER
   public function register($data)
   {
-    if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
-      throw new Exception("All fields required");
+    $username = trim($data['username'] ?? '');
+    $email = trim($data['email'] ?? '');
+    $password = $data['password'] ?? '';
+    $confirm = $data['password_konfirmasi'] ?? '';
+
+    if (!$username || !$email || !$password || !$confirm) {
+      throw new Exception('Semua field wajib diisi');
     }
 
-    if ($this->users->findByEmail($data['email'])) {
-      throw new Exception("Email already registered");
+    if ($password !== $confirm) {
+      throw new Exception('Password tidak cocok');
     }
 
-    $hashed = password_hash($data['password'], PASSWORD_BCRYPT);
-
-    $this->users->create(
-      $data['name'],
-      $data['email'],
-      $hashed
-    );
-  }
-
-  // LOGIN
-  public function login($data)
-  {
-    if (empty($data['email']) || empty($data['password'])) {
-      throw new Exception("Email & password required");
-    }
-    $user = $this->users->findByEmail($data['email']);
-
-    if (!$user || !password_verify($data['password'], $user['password'])) {
-      throw new Exception("Invalid credentials");
+    if (strlen($password) < 6) {
+      throw new Exception('Password minimal 6 karakter');
     }
 
-    $_SESSION['user'] = [
-      'id'    => $user['id'],
-      'name'  => $user['name'],
-      'email' => $user['email'],
-    ];
-  }
+    if ($this->userRepo->findByEmail($email)) {
+      throw new Exception('Email sudah terdaftar');
+    }
 
-  public function logout()
-  {
-    session_destroy();
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+
+    $this->userRepo->create($username, $email, $hash);
   }
 }

@@ -1,19 +1,27 @@
 <?php
+require_once __DIR__ . '/../services/AuthService.php';
+
 class RegisterController
 {
   public function index()
   {
-    $name = "Register Page";
-    require __DIR__ . '/../../resources/views/auth/register.php';
+    $name = "Register";
+    require_once __DIR__ . "/../../resources/views/auth/register.php";
   }
 
   public function store()
   {
-    // if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    //   die('Invalid request');
-    // }
+    try {
+      $auth = new AuthService();
+      $auth->register($_POST);
 
-    var_dump($_POST);
-    exit;
+      $_SESSION['success'] = 'Registrasi berhasil, silakan login';
+      header('Location: /login');
+      exit;
+    } catch (Exception $e) {
+      $_SESSION['error'] = $e->getMessage();
+      header('Location: /register');
+      exit;
+    }
   }
 }

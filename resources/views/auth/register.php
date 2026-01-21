@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php if (!empty($_SESSION['error'])): ?>
+  <p style="color:red;">
+    <?= $_SESSION['error'];
+    unset($_SESSION['error']); ?>
+  </p>
+<?php endif; ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $name; ?></title>
-</head>
-
-<body>
-  <h2>Register</h2>
-  <form method="POST" action="/register">
-    <input type="text" name="username" placeholder="Username" required>
-    <br>
-    <input type="email" name="email" placeholder="Email" required>
-    <br>
-    <input type="password" name="confPass" placeholder="Konfirmasi Password" required>
-    <br>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Register</button>
-  </form>
-</body>
-
-</html>
+<form method="POST" action="/register">
+  <input name="username" placeholder="Username" required><br>
+  <input name="email" type="email" placeholder="Email" required><br>
+  <input name="password_konfirmasi" type="password" placeholder="Konfirmasi Password" required><br>
+  <input name="password" type="password" placeholder="Password" required><br>
+  <button type="submit">Register</button>
+</form>

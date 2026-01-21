@@ -2,27 +2,33 @@
 
 class UserRepository
 {
-  private $db;
+  private $pdo;
 
   public function __construct()
   {
-    $this->db = Database::connect();
+    $this->pdo = Database::connect();
   }
 
   public function findByEmail($email)
   {
-    $stmt = $this->db->prepare(
+    $stmt = $this->pdo->prepare(
       "SELECT * FROM users WHERE email = :email LIMIT 1"
     );
     $stmt->execute(['email' => $email]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
   }
 
-  public function create($name, $email, $password)
+  public function create($username, $email, $password)
   {
-    $stmt = $this->db->prepare(
-      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)"
+    $stmt = $this->pdo->prepare(
+      "INSERT INTO users (username, email, password)
+             VALUES (:username, :email, :password)"
     );
-    return $stmt->execute([$name, $email, $password]);
+
+    return $stmt->execute([
+      'username' => $username,
+      'email' => $email,
+      'password' => $password,
+    ]);
   }
 }

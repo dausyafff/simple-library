@@ -12,6 +12,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $basePath = '/perpustakaan/public';
 $uri = str_replace($basePath, '', $uri);
 $uri = rtrim($uri, '/') ?: '/';
+$url = urldecode($uri);
 
 if (!isset($routes[$method][$uri])) {
   http_response_code(404);
