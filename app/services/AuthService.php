@@ -38,4 +38,26 @@ class AuthService
 
     $this->userRepo->create($username, $email, $hash);
   }
+
+  public function login($data)
+  {
+    $email = trim($data['email'] ?? '');
+    $password = $data['password'] ?? '';
+
+    if (!$email || !$password) {
+      throw new Exception('Email dan password wajib diisi');
+    }
+
+    $user = $this->userRepo->findByEmail($email);
+    if (!$user || !password_verify($password, $user['password'])) {
+      throw new Exception('Email atau password salah');
+    }
+
+    // Set session
+    $_SESSION['user'] = [
+      'id' => $user['id'],
+      'username' => $user['username'],
+      'email' => $user['email'],
+    ];
+  }
 }

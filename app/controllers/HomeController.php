@@ -5,7 +5,8 @@ class HomeController
 {
   public function index()
   {
+
     $books = (new BookService())->listHomepageBooks();
-    require __DIR__ . '/../../resources/views/dashboard/home.php';
+    require __DIR__ . '/../../resources/index.php';
   }
 }

@@ -4,8 +4,8 @@ return [
     '/' => ['HomeController', 'index'],
     '/login' => ['AuthController', 'index'],
     '/register' => ['RegisterController', 'index'],
-    '/books' => ['BookController', 'index'],
-    '/books/create' => ['BookController', 'create'],
+    "/dashboard" => ['HomeController', 'index'],
+    "/logout" => ['AuthController', 'logout'],
   ],
 
   'POST' => [

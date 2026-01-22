@@ -9,11 +9,22 @@ class AuthController
 
   public function login()
   {
-    // Handle login logic here
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    try {
+      $auth = new AuthService();
+      $auth->login($_POST);
 
-    var_dump($username);
-    var_dump($password);
+      header('Location: /dashboard');
+      exit;
+    } catch (Exception $e) {
+      $_SESSION['error'] = $e->getMessage();
+      header('Location: /login');
+      exit;
+    }
+  }
+  public function logout()
+  {
+    session_destroy();
+    header('Location: /login');
+    exit;
   }
 }
