@@ -6,6 +6,7 @@
 </head>
 
 <body>
+  <a href="/register">Belum Punya Akun ?</a>
   <h2>Login</h2>
 
   <?php if (!empty($_SESSION['error'])): ?>

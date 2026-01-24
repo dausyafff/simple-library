@@ -1,16 +1,47 @@
 <?php
 return [
   'GET' => [
-    '/' => ['HomeController', 'index'],
-    '/login' => ['AuthController', 'index'],
-    '/register' => ['RegisterController', 'index'],
-    "/dashboard" => ['HomeController', 'index'],
-    "/logout" => ['AuthController', 'logout'],
+    '/' => [
+      'controller' => 'HomeController',
+      'method' => 'index'
+    ],
+
+    '/login' => [
+      'controller' => 'AuthController',
+      'method' => 'index',
+      'middleware' => 'guest'
+    ],
+
+    '/register' => [
+      'controller' => 'RegisterController',
+      'method' => 'index',
+      'middleware' => 'guest'
+    ],
+
+    '/dashboard' => [
+      'controller' => 'DashboardController',
+      'method' => 'index',
+      'middleware' => 'auth'
+    ],
+
+    '/logout' => [
+      'controller' => 'AuthController',
+      'method' => 'logout',
+      'middleware' => 'auth'
+    ],
   ],
 
   'POST' => [
-    '/books/store' => ['BookController', 'store'],
-    '/register' => ['RegisterController', 'store'],
-    '/login' => ['AuthController', 'login'],
+    '/login' => [
+      'controller' => 'AuthController',
+      'method' => 'login',
+      'middleware' => 'guest'
+    ],
+
+    '/register' => [
+      'controller' => 'RegisterController',
+      'method' => 'store',
+      'middleware' => 'guest'
+    ],
   ]
 ];

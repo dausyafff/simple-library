@@ -5,7 +5,7 @@ class HomeController
 {
   public function index()
   {
-
+    $name = "Home";
     $books = (new BookService())->listHomepageBooks();
     require __DIR__ . '/../../resources/index.php';
   }

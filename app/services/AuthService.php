@@ -54,10 +54,11 @@ class AuthService
     }
 
     // Set session
-    $_SESSION['user'] = [
-      'id' => $user['id'],
-      'username' => $user['username'],
-      'email' => $user['email'],
+    $_SESSION["user"] = [
+      "id" => $user["id"],
+      "username" => $user["username"],
+      "email" => $user["email"],
+      "role" => $user["role"]
     ];
   }
 }

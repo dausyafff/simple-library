@@ -1,4 +1,6 @@
 <?php
+
+require_once __DIR__ . '/../services/AuthService.php';
 class AuthController
 {
   public function index()
@@ -23,6 +25,7 @@ class AuthController
   }
   public function logout()
   {
+    session_unset();
     session_destroy();
     header('Location: /login');
     exit;
