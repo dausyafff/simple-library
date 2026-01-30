@@ -16,10 +16,11 @@ class RegisterController
       $auth->register($_POST);
 
       $_SESSION['success'] = 'Registrasi berhasil, silakan login';
+      Flash::set("success", "Registrasi berhasil, silakan login");
       header('Location: /login');
       exit;
     } catch (Exception $e) {
-      $_SESSION['error'] = $e->getMessage();
+      Flash::set("error", $e->getMessage());
       header('Location: /register');
       exit;
     }

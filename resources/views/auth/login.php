@@ -16,6 +16,15 @@
     </p>
   <?php endif; ?>
 
+  <?php if ($msg = Flash::get('error')): ?>
+    <p style="color:red"><?= htmlspecialchars($msg) ?></p>
+  <?php endif; ?>
+
+  <?php if ($msg = Flash::get('success')): ?>
+    <p style="color:green"><?= htmlspecialchars($msg) ?></p>
+  <?php endif; ?>
+
+
   <form method="POST" action="/login">
     <input type="email" name="email" placeholder="Email" required><br>
     <input type="password" name="password" placeholder="Password" required><br>

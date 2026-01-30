@@ -11,7 +11,8 @@ class BookController
 
   public function index()
   {
-    $books = $this->service->listBooks();
+    $repo = new BookRepository();
+    $books = $repo->all();
     require __DIR__ . '/../../resources/views/dashboard/home.php';
   }
 
@@ -19,12 +20,23 @@ class BookController
   {
     $authors = (new AuthorRepository())->all();
     $categories = (new CategoryRepository())->all();
-    require __DIR__ . "../create.php";
+    require __DIR__ . '/../../resources/views/books/create.php';
   }
 
   public function store()
   {
-    $this->service->addBook($_POST);
-    header("Location: /books");
+    $title = $_POST['title'] ?? '';
+
+    if (!$title) {
+      $_SESSION['error'] = 'Judul wajib diisi';
+      header('Location: /books/create');
+      exit;
+    }
+
+    $repo = new BookRepository();
+    $repo->create($title);
+
+    header('Location: /books');
+    exit;
   }
 }

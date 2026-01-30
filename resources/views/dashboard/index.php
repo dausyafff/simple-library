@@ -5,4 +5,6 @@
 
 <hr>
 
-<a href="/logout">Logout</a>
+<form method="POST" action="/logout">
+  <button type="submit">Logout</button>
+</form>

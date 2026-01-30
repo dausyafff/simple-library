@@ -24,10 +24,16 @@ return [
       'middleware' => 'auth'
     ],
 
-    '/logout' => [
-      'controller' => 'AuthController',
-      'method' => 'logout',
+    '/books' => [
+      'controller' => 'BookController',
+      'method' => 'index',
       'middleware' => 'auth'
+    ],
+
+    '/books/create' => [
+      'controller' => 'BookController',
+      'method' => 'create',
+      'middleware' => 'admin'
     ],
   ],
 
@@ -42,6 +48,18 @@ return [
       'controller' => 'RegisterController',
       'method' => 'store',
       'middleware' => 'guest'
+    ],
+
+    '/books/store' => [
+      'controller' => 'BookController',
+      'method' => 'store',
+      'middleware' => 'admin'
+    ],
+
+    "/logout" => [
+      'controller' => 'AuthController',
+      'method' => 'logout',
+      'middleware' => 'auth'
     ],
   ]
 ];

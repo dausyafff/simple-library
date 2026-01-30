@@ -3,6 +3,7 @@ session_start();
 
 require_once __DIR__ . '/../app/middleware/AuthMiddleware.php';
 require_once __DIR__ . '/../app/config/Database.php';
+require_once __DIR__ . '/../app/helpers/flash.php';
 
 $routes = require __DIR__ . '/../routes/web.php';
 

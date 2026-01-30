@@ -28,6 +28,6 @@ class BookService
   }
   public function listHomepageBooks()
   {
-    return $this->repo->getLatestBooks();
+    return $this->repo->all();
   }
 }
