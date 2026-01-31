@@ -1,5 +1,8 @@
 <?php
-
+require_once __DIR__ . '/../services/BookService.php';
+require_once __DIR__ . '/../repositories/BookRepository.php';
+// require_once __DIR__ . '/../repositories/CategoryRepository.php';
+// require_once __DIR__ . '/../repositories/AuthorRepository.php';
 class BookController
 {
   private $service;
@@ -13,7 +16,7 @@ class BookController
   {
     $repo = new BookRepository();
     $books = $repo->all();
-    require __DIR__ . '/../../resources/views/dashboard/home.php';
+    require __DIR__ . '/../../resources/views/books/index.php';
   }
 
   public function create()
@@ -25,18 +28,15 @@ class BookController
 
   public function store()
   {
-    $title = $_POST['title'] ?? '';
-
-    if (!$title) {
-      $_SESSION['error'] = 'Judul wajib diisi';
+    try {
+      $this->service->createBook($_POST);
+      Flash::set('success', 'Buku berhasil ditambahkan');
+      header('Location: /books');
+      exit;
+    } catch (Exception $e) {
+      Flash::set('error', $e->getMessage());
       header('Location: /books/create');
       exit;
     }
-
-    $repo = new BookRepository();
-    $repo->create($title);
-
-    header('Location: /books');
-    exit;
   }
 }

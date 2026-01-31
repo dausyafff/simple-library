@@ -1,11 +1,77 @@
-<h2>Daftar Buku</h2>
+<!DOCTYPE html>
+<html>
 
-<?php if ($_SESSION['user']['role'] === 'admin'): ?>
-  <a href="/books/create">Tambah Buku</a>
-<?php endif; ?>
+<head>
+  <title>Data Buku</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-<ul>
-  <?php foreach ($books as $book): ?>
-    <li><?= htmlspecialchars($book['title']) ?></li>
-  <?php endforeach; ?>
-</ul>
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background: #f5f5f5;
+    }
+
+    .btn {
+      padding: 6px 10px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-add {
+      background: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>📚 Data Buku</h2>
+
+  <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+    <a href="/books/create" class="btn btn-add">+ Tambah Buku</a>
+  <?php endif; ?>
+
+  <br><br>
+
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Judul</th>
+      <th>Penulis</th>
+      <th>Tahun</th>
+
+      <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+        <th>Aksi</th>
+      <?php endif; ?>
+    </tr>
+
+    <?php foreach ($books as $index => $book): ?>
+      <tr>
+        <td><?= $index + 1 ?></td>
+        <td><?= htmlspecialchars($book['title']) ?></td>
+        <td><?= htmlspecialchars($book['author']) ?></td>
+        <td><?= $book['year'] ?></td>
+
+        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+          <td>
+            <a href="#" class="btn">Edit</a>
+            <a href="#" class="btn">Hapus</a>
+          </td>
+        <?php endif; ?>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+
+</body>
+
+</html>

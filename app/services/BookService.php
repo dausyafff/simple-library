@@ -30,4 +30,14 @@ class BookService
   {
     return $this->repo->all();
   }
+  public function createBook($data)
+  {
+    $title = trim($data['title'] ?? '');
+
+    if (!$title) {
+      throw new Exception('Judul buku wajib diisi');
+    }
+
+    $this->repo->create($title);
+  }
 }
