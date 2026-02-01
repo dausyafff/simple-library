@@ -11,7 +11,19 @@ class BookRepository
 
   public function all()
   {
-    return $this->db->query("SELECT * FROM books")->fetchAll();
+    $sql = "
+    SELECT 
+      books.id,
+      books.title,
+      authors.name AS author,
+      categories.name AS category,
+      books.created_at
+    FROM books
+    LEFT JOIN authors ON books.author_id = authors.id
+    LEFT JOIN categories ON books.category_id = categories.id
+  ";
+
+    return $this->db->query($sql)->fetchAll();
   }
 
   public function create($title)

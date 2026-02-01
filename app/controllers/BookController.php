@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../services/BookService.php';
 require_once __DIR__ . '/../repositories/BookRepository.php';
-// require_once __DIR__ . '/../repositories/CategoryRepository.php';
-// require_once __DIR__ . '/../repositories/AuthorRepository.php';
+require_once __DIR__ . '/../repositories/CategoryRepository.php';
+require_once __DIR__ . '/../repositories/AuthorRepository.php';
 class BookController
 {
   private $service;
