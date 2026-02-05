@@ -42,7 +42,7 @@
   <?php endif; ?>
 
   <br><br>
-
+  <p>Ini tabel admin</p>
   <table>
     <tr>
       <th>No</th>
@@ -60,7 +60,7 @@
         <td><?= $index + 1 ?></td>
         <td><?= htmlspecialchars($book['title']) ?></td>
         <td><?= htmlspecialchars($book['author']) ?></td>
-        <td><?= $book['year'] ?></td>
+        <td><?= htmlspecialchars($book['year']) ?></td>
 
         <?php if ($_SESSION['user']['role'] === 'admin'): ?>
           <td>

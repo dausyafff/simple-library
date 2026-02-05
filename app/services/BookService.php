@@ -33,11 +33,13 @@ class BookService
   public function createBook($data)
   {
     $title = trim($data['title'] ?? '');
+    $author = $data['author_id'] ?? null;
+    $category = $data['category_id'] ?? null;
 
     if (!$title) {
-      throw new Exception('Judul buku wajib diisi');
+      throw new Exception('Judul wajib');
     }
 
-    $this->repo->create($title);
+    $this->repo->create($title, $author, $category);
   }
 }

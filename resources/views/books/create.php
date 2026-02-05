@@ -13,8 +13,14 @@
     <label>Judul</label><br>
     <input type="text" name="title" required><br><br>
 
-    <label>Penulis</label><br>
-    <input type="text" name="author" required><br><br>
+    <select name="author_id" required>
+      <?php foreach ($authors as $a): ?>
+        <option value="<?= $a['id'] ?>">
+          <?= htmlspecialchars($a['name']) ?>
+        </option>
+      <?php endforeach ?>
+    </select>
+
 
     <label>Tahun</label><br>
     <input type="number" name="year" required><br><br>
