@@ -2,8 +2,8 @@
 require_once __DIR__ . '/../helpers/flash.php';
 require_once __DIR__ . '/../services/BookService.php';
 require_once __DIR__ . '/../repositories/BookRepository.php';
-require_once __DIR__ . '/../repositories/CategoryRepository.php';
 require_once __DIR__ . '/../repositories/AuthorRepository.php';
+require_once __DIR__ . '/../repositories/CategoryRepository.php';
 class BookController
 {
   private $service;
@@ -40,5 +40,23 @@ class BookController
       header('Location: /books/create');
       exit;
     }
+  }
+  public function edit()
+  {
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+      Flash::set('error', 'ID buku tidak ditemukan');
+      header('Location: /books');
+      exit;
+    }
+
+    $book = $this->service->getBookById($id);
+    if (!$book) {
+      Flash::set('error', 'Buku tidak ditemukan');
+      header('Location: /books');
+      exit;
+    }
+
+    require __DIR__ . '/../../resources/views/books/edit.php';
   }
 }

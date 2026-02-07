@@ -46,4 +46,9 @@ class BookService
     // Kirim ke repository
     $this->repo->create($title, $author_id, $category_id, $year);
   }
+
+  public function getBookById($id)
+  {
+    return $this->repo->findById($id);
+  }
 }

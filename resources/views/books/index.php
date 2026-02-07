@@ -64,8 +64,8 @@
 
         <?php if ($_SESSION['user']['role'] === 'admin'): ?>
           <td>
-            <a href="#" class="btn">Edit</a>
-            <a href="#" class="btn">Hapus</a>
+            <a href="/books/edit/<?= $book['id'] ?>" class="btn">Edit</a>
+            <a href="/books/delete/<?= $book['id'] ?>" class="btn">Hapus</a>
           </td>
         <?php endif; ?>
       </tr>

@@ -17,7 +17,8 @@ class BookRepository
       books.title,
       authors.name AS author,
       categories.name AS category,
-      books.created_at
+      books.created_at,
+      books.year
     FROM books
     LEFT JOIN authors ON books.author_id = authors.id
     LEFT JOIN categories ON books.category_id = categories.id
@@ -34,5 +35,12 @@ class BookRepository
   ");
 
     $stmt->execute([$title, $author_id, $category_id, $year]);
+  }
+
+  public function findById($id)
+  {
+    $stmt = $this->db->prepare("SELECT * FROM books WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch();
   }
 }
