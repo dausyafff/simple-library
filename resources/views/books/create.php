@@ -7,6 +7,7 @@
 
 <body>
 
+
   <h2>➕ Tambah Buku</h2>
 
   <form action="/books/store" method="POST">
@@ -20,9 +21,18 @@
         </option>
       <?php endforeach ?>
     </select>
-
-
-    <label>Tahun</label><br>
+    <br>
+    <br>
+    <select name="category_id" required>
+      <?php foreach ($categories as $c): ?>
+        <option value="<?= $c['id'] ?>">
+          <?= htmlspecialchars($c['name']) ?>
+        </option>
+      <?php endforeach ?>
+    </select>
+    <br>
+    <br>
+    <label>Tahun</label>
     <input type="number" name="year" required><br><br>
 
     <button type="submit">Simpan</button>

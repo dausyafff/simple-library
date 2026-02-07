@@ -26,13 +26,13 @@ class BookRepository
     return $this->db->query($sql)->fetchAll();
   }
 
-  public function create($title, $author_id, $category_id)
+  public function create($title, $author_id, $category_id, $year)
   {
     $stmt = $this->db->prepare("
-    INSERT INTO books (title, author_id, category_id)
-    VALUES (?, ?, ?)
+    INSERT INTO books (title, author_id, category_id, year)
+    VALUES (?, ?, ?, ?)
   ");
 
-    $stmt->execute([$title, $author_id, $category_id]);
+    $stmt->execute([$title, $author_id, $category_id, $year]);
   }
 }

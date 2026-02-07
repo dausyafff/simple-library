@@ -34,7 +34,7 @@
 </head>
 
 <body>
-
+  <?= $tes ?? '000' ?>
   <h2>📚 Data Buku</h2>
 
   <?php if ($_SESSION['user']['role'] === 'admin'): ?>
@@ -59,8 +59,8 @@
       <tr>
         <td><?= $index + 1 ?></td>
         <td><?= htmlspecialchars($book['title']) ?></td>
-        <td><?= htmlspecialchars($book['author']) ?></td>
-        <td><?= htmlspecialchars($book['year']) ?></td>
+        <td><?= htmlspecialchars($book['author'] ?? '-') ?></td>
+        <td><?= htmlspecialchars($book['year'] ?? '-') ?></td>
 
         <?php if ($_SESSION['user']['role'] === 'admin'): ?>
           <td>

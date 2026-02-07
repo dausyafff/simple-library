@@ -14,32 +14,36 @@ class BookService
     return $this->repo->getAll();
   }
 
-  public function addBook($data)
-  {
-    if (empty($data['title'])) {
-      throw new Exception("Title required");
-    }
-
-    $this->repo->create(
-      $data['title'],
-      $data['author_id'],
-      $data['category_id']
-    );
-  }
   public function listHomepageBooks()
   {
     return $this->repo->all();
   }
+
   public function createBook($data)
   {
     $title = trim($data['title'] ?? '');
-    $author = $data['author_id'] ?? null;
-    $category = $data['category_id'] ?? null;
+    $author_id = $data['author_id'] ?? null;
+    $category_id = $data['category_id'] ?? null;
+    $year = $data['year'] ?? null;
 
+    // Validasi dasar (cara industri)
     if (!$title) {
-      throw new Exception('Judul wajib');
+      throw new Exception('Judul buku wajib diisi');
     }
 
-    $this->repo->create($title, $author, $category);
+    if (!$author_id) {
+      throw new Exception('Author wajib dipilih');
+    }
+
+    if (!$category_id) {
+      throw new Exception('Category wajib dipilih');
+    }
+
+    if ($year && !is_numeric($year)) {
+      throw new Exception('Tahun harus angka');
+    }
+
+    // Kirim ke repository
+    $this->repo->create($title, $author_id, $category_id, $year);
   }
 }

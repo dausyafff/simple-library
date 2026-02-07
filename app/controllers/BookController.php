@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../helpers/flash.php';
 require_once __DIR__ . '/../services/BookService.php';
 require_once __DIR__ . '/../repositories/BookRepository.php';
 require_once __DIR__ . '/../repositories/CategoryRepository.php';
@@ -15,6 +16,7 @@ class BookController
   public function index()
   {
     $repo = new BookRepository();
+    $tes = "Dari index controller";
     $books = $repo->all();
     require __DIR__ . '/../../resources/views/books/index.php';
   }
