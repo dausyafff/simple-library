@@ -35,6 +35,11 @@ return [
       'method' => 'create',
       'middleware' => 'admin'
     ],
+    '/books/edit/{id}' => [
+      'controller' => 'BookController',
+      'method' => 'edit',
+      'middleware' => 'admin'
+    ],
   ],
 
   'POST' => [
@@ -53,6 +58,11 @@ return [
     '/books/store' => [
       'controller' => 'BookController',
       'method' => 'store',
+      'middleware' => 'admin'
+    ],
+    '/books/update' => [
+      'controller' => 'BookController',
+      'method' => 'update',
       'middleware' => 'admin'
     ],
 

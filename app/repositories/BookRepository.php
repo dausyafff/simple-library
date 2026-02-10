@@ -43,4 +43,17 @@ class BookRepository
     $stmt->execute([$id]);
     return $stmt->fetch();
   }
+
+  public function update($id, $title, $author_id, $category_id, $year)
+  {
+    $stmt = $this->db->prepare(
+      "
+    UPDATE books
+    SET title = ?, author_id = ?, category_id = ?, year = ?
+    WHERE id = ?
+    }  "
+    );
+
+    $stmt->execute([$title, $author_id, $category_id, $year, $id]);
+  }
 }

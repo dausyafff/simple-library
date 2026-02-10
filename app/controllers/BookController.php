@@ -59,4 +59,18 @@ class BookController
 
     require __DIR__ . '/../../resources/views/books/edit.php';
   }
+
+  public function update()
+  {
+    try {
+      $this->service->updateBook($_POST);
+      Flash::set('success', 'Buku berhasil diperbarui');
+      header('Location: /books');
+      exit;
+    } catch (Exception $e) {
+      Flash::set('error', $e->getMessage());
+      header('Location: /books/edit?id=' . $_POST['id']);
+      exit;
+    }
+  }
 }
