@@ -50,8 +50,7 @@ class BookRepository
       "
     UPDATE books
     SET title = ?, author_id = ?, category_id = ?, year = ?
-    WHERE id = ?
-    }  "
+    WHERE id = ? "
     );
 
     $stmt->execute([$title, $author_id, $category_id, $year, $id]);

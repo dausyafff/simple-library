@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halaman Edit Buku</title>
+  <title>Halaman Update Buku</title>
 </head>
 
 <body>
@@ -17,7 +17,23 @@
     </div>
     <div>
       <label for="author">Penulis:</label>
-      <input type="text" id="author" name="author" value="<?= htmlspecialchars($book['author']) ?>" required>
+      <select name="author_id" required>
+        <?php foreach ($authors as $a): ?>
+          <option value="<?= $a['id'] ?>" <?= $a['id'] == $book['author_id'] ? 'selected' : '' ?>>
+            <?= htmlspecialchars($a['name']) ?>
+          </option>
+        <?php endforeach ?>
+      </select>
+    </div>
+    <div>
+      <select name="category_id" required>
+        <?php foreach ($categories as $c): ?>
+          <option value="<?= $c['id'] ?>" <?= $c['id'] == $book['category_id'] ? 'selected' : '' ?>>
+            <?= htmlspecialchars($c['name']) ?>
+          </option>
+        <?php endforeach ?>
+      </select>
+
     </div>
     <div>
       <label for="year">Tahun Terbit:</label>

@@ -35,7 +35,7 @@ return [
       'method' => 'create',
       'middleware' => 'admin'
     ],
-    '/books/edit/{id}' => [
+    '/books/edit' => [
       'controller' => 'BookController',
       'method' => 'edit',
       'middleware' => 'admin'
@@ -64,6 +64,13 @@ return [
       'controller' => 'BookController',
       'method' => 'update',
       'middleware' => 'admin'
+    ],
+    [
+      '/books/delete' => [
+        'controller' => 'BookController',
+        'method' => 'delete',
+        'middleware' => 'admin'
+      ],
     ],
 
     "/logout" => [

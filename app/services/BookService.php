@@ -11,7 +11,7 @@ class BookService
 
   public function listBooks()
   {
-    return $this->repo->getAll();
+    return $this->repo->all();
   }
 
   public function listHomepageBooks()

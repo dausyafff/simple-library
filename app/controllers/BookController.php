@@ -43,6 +43,8 @@ class BookController
   }
   public function edit()
   {
+    $authors = (new AuthorRepository())->all();
+    $categories = (new CategoryRepository())->all();
     $id = $_GET['id'] ?? null;
     if (!$id) {
       Flash::set('error', 'ID buku tidak ditemukan');
@@ -57,13 +59,13 @@ class BookController
       exit;
     }
 
-    require __DIR__ . '/../../resources/views/books/edit.php';
+    require __DIR__ . '/../../resources/views/books/update.php';
   }
 
   public function update()
   {
     try {
-      $this->service->updateBook($_POST);
+      $this->service->updateBook($_POST["id"] ?? null, $_POST);
       Flash::set('success', 'Buku berhasil diperbarui');
       header('Location: /books');
       exit;
