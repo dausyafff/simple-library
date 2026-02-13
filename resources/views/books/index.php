@@ -35,6 +35,11 @@
 
 <body>
   <a href="/dashboard">Kembali ke Dashboard</a><br>
+  <form method="GET" action="/books">
+    <input type="text" name="search" placeholder="Cari judul..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+    <button type="submit">Search</button>
+  </form>
+
   <h2>📚 Data Buku, <?= $tes ?? '000' ?></h2>
 
   <?php if ($_SESSION['user']['role'] === 'admin'): ?>
@@ -65,12 +70,25 @@
         <?php if ($_SESSION['user']['role'] === 'admin'): ?>
           <td>
             <a href="/books/edit?id=<?= $book['id'] ?>" class="btn">Edit</a>
-            <a href="/books/delete?id=<?= $book['id'] ?>" class="btn">Hapus</a>
+
+            <form action="/books/delete" method="POST" style="display:inline-block"
+              onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+              <input type="hidden" name="id" value="<?= $book['id'] ?>">
+              <button type="submit" class="btn">Hapus</button>
+            </form>
           </td>
         <?php endif; ?>
       </tr>
     <?php endforeach; ?>
   </table>
+
+  <div>
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+      <a href="/books?page=<?= $i ?>&search=<?= $_GET['search'] ?? '' ?>">
+        <?= $i ?>
+      </a>
+    <?php endfor; ?>
+  </div>
 
 </body>
 

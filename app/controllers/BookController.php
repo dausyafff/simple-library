@@ -15,11 +15,17 @@ class BookController
 
   public function index()
   {
-    $repo = new BookRepository();
-    $tes = "Dari index controller";
-    $books = $repo->all();
+    $page = $_GET['page'] ?? 1;
+    $search = $_GET['search'] ?? '';
+
+    $results = $this->service->getPaginatedBooks($page, $search);
+
+    $books = $results['books']; // ✅ pakai hasil pagination
+    $totalPages = ceil($results['total'] / $results["limit"]);
+
     require __DIR__ . '/../../resources/views/books/index.php';
   }
+
 
   public function create()
   {
@@ -72,6 +78,26 @@ class BookController
     } catch (Exception $e) {
       Flash::set('error', $e->getMessage());
       header('Location: /books/edit?id=' . $_POST['id']);
+      exit;
+    }
+  }
+  public function delete()
+  {
+    try {
+      $id = $_POST['id'] ?? null; // ✅ ini yang benar
+
+      if (!$id) {
+        throw new Exception('ID buku tidak ditemukan');
+      }
+
+      $this->service->deleteBook($id);
+
+      Flash::set('success', 'Buku berhasil dihapus');
+      header('Location: /books');
+      exit;
+    } catch (Exception $e) {
+      Flash::set('error', $e->getMessage());
+      header('Location: /books');
       exit;
     }
   }

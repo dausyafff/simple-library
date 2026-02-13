@@ -79,4 +79,24 @@ class BookService
     // Kirim ke repository
     $this->repo->update($id, $title, $author_id, $category_id, $year);
   }
+
+  public function deleteBook($id)
+  {
+    $this->repo->delete($id);
+  }
+
+  public function getPaginatedBooks($page, $search = null)
+  {
+    $limit = 3; // jumlah data per halaman
+    $offset = ($page - 1) * $limit;
+
+    $books = $this->repo->paginate($limit, $offset, $search);
+    $total = $this->repo->countAll($search);
+
+    return [
+      'books' => $books,
+      'total' => $total,
+      'limit' => $limit
+    ];
+  }
 }

@@ -65,14 +65,11 @@ return [
       'method' => 'update',
       'middleware' => 'admin'
     ],
-    [
-      '/books/delete' => [
-        'controller' => 'BookController',
-        'method' => 'delete',
-        'middleware' => 'admin'
-      ],
+    '/books/delete' => [
+      'controller' => 'BookController',
+      'method' => 'delete',
+      'middleware' => 'admin'
     ],
-
     "/logout" => [
       'controller' => 'AuthController',
       'method' => 'logout',
