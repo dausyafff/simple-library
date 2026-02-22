@@ -19,7 +19,7 @@
       <?php foreach ($books as $book): ?>
         <li>
           <strong><?= htmlspecialchars($book['title']) ?></strong>
-          oleh <?= htmlspecialchars($book['authors'] ?? '–') ?>
+          oleh <?= htmlspecialchars($book['author'] ?? '–') ?>
           [<?= htmlspecialchars($book['category_name'] ?? '–') ?>],
           Tahun <?= htmlspecialchars($book['year'] ?? '–') ?>
         </li>
