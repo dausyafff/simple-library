@@ -3,6 +3,6 @@ LABEL maintainer="Dausyaf Aryandha"
 
 # dia akan dijalankan ketika membangun image
 RUN apt-get update
-
+WORKDIR /home/coba
 # ketika container dijalankan, maka perintah ini akan dijalankan
-CMD ["echo", "Hello World!"]
+CMD ["echo", "Hello World! dari Dockerfile! Tiga"]

@@ -5,4 +5,4 @@ LABEL maintainer="Dausyaf Aryandha"
 RUN apt-get update
 
 # ketika container dijalankan, maka perintah ini akan dijalankan
-CMD ["echo", "Hello World!"]
+CMD ["echo", "Hello World! dari Dockerfile! dua"]
